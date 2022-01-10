@@ -1,0 +1,9 @@
+<div class="row offset-2">
+  <h2>商品一覧</h2>
+  
+  <div class="offset-6 col-1">
+    <%= link_to new_admin_item_path, class: "btn btn-light" %>
+  </div>
+</div>
+
+<%= render "index", items: @items %>
