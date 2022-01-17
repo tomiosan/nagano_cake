@@ -9,15 +9,14 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark">
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <div><%= link_to "Admins", root_path %></div>
+          <div><%= link_to "Admin", admin_root_path %></div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <% if admin_signed_in? %>
@@ -38,10 +37,7 @@
                </li>
                <% else %>
                <li>
-                 <%= link_to "About", about_path, class:"fas fa-home nav-link text-light" %>
-               </li>
-               <li>
-                 <%= link_to "商品一覧", products_path, class:"fas fa-link nav-link text-light" %>
+                 <%= link_to "商品一覧", admin_items_path, class:"fas fa-link nav-link text-light" %>
                </li>
                <li>
                  <%= link_to "新規登録", new_customer_registration_path, class:"fas fa-user-plus nav-link text-light" %>
@@ -55,5 +51,13 @@
         </div>
       </nav>
     </header>
+
+    <main style="margin-bottom:80px">
+      <div class="container p-3">
+        <p class="text-success"><%= notice %></p>
+        <p class="text-danger"><%= alert %></p>
+        <%= yield %>
+      </div>
+    </main>
   </body>
 </html>
