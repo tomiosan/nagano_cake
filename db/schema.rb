@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_28_020832) do
+ActiveRecord::Schema.define(version: 2022_01_18_110058) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_12_28_020832) do
     t.string "first_name_kana"
     t.string "postal_code"
     t.string "address"
-    t.string "telephone_number"
+    t.string "phone_number"
     t.boolean "is_deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2021_12_28_020832) do
     t.string "image_id", default: "", null: false
     t.text "introduction", default: "", null: false
     t.integer "price", null: false
-    t.boolean "is_active", null: false
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(version: 2021_12_28_020832) do
     t.integer "postage"
     t.integer "total_payment", null: false
     t.integer "payment_method", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", null: false
   end
 
 end
