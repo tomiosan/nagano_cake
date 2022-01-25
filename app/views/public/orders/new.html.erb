@@ -1,0 +1,48 @@
+<div class="row offset-">
+  <h3>注文情報入力</h3>
+</div>
+
+<%= form_with url: check_orders_path, local: true, method: :post do |f| %>
+  <h5>支払方法</h5>
+  <div class="col">
+    <%= f.collection_radio_buttons :payment_method, Order.payment_methods_i18n, :first, :last, { checked: @order.payment_method ||= "credit_card" } %>
+  </div>
+
+  <h5>お届け先</h5>
+  <div class="col">
+    <%= f.radio_button :address_type, 1, checked: @address_type ||= 1 == 1  %>
+    <%= f.label :address_type, "ご自身の住所", value: 1 %>
+    <div class="col"><%= @order.customer.full_address %></div>
+  </div>
+
+  <div class="col mt-3">
+    <%= f.radio_button :address_type, 2, checked: @address_type == 2 %>
+    <%= f.label :address_type, "登録済み住所", value: 2 %><br>
+    <div class="col"><%= f.select :delivery_id, current_customer.reload.deliveries.map { |a| [a.full_addresses, a.id] } %></div>
+  </div>
+
+  <div class="col mt-3">
+    <%= f.radio_button :address_type, 3, checked: @address_type == 3 %>
+    <%= f.label :address_type, "新規住所", value: 3 %>
+    <div class="col">
+      <div class="row form-group">
+        <div class="col-md-4"><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></div>
+        <div class="col-md-5"><%= f.text_field :postal_code, value: @delivery.postal_code, class:"form-control"%></div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4"><%= f.label :address, "住所" %></div>
+        <div class="col-md-7"><%= f.text_field :address, value: @delivery.address, class:"form-control"%></div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4"><%= f.label :name, "宛名" %></div>
+        <div class="col-md-5"><%= f.text_field :name, value: @delivery.name, class:"form-control"%></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="text-center mt-5">
+      <%= f.submit "確認画面へ進む" , class:"btn btn-dark btn-lg" %>
+    </div>
+  </div>
+  <% end %>

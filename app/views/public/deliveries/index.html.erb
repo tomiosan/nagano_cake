@@ -1,0 +1,27 @@
+<h3 class="ml-5">配送先登録/一覧</h3>
+
+<%= render 'form', delivery: @delivery %>
+
+<table class="table table-light table-striped mt-5 col-12">
+  <thead class="table-active">
+    <tr class="text-white bg-dark">
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>宛名</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @deliveries.each do |delivery| %>
+      <tr>
+        <td><%= delivery.postal_code %></td>
+        <td><%= delivery.address %></td>
+        <td><%= delivery.name %></td>
+        <td class="text-center">
+          <%= link_to "編集する" ,edit_delivery_path(delivery.id) , class:"btn btn-dark btn-sm mr-auto mb-1 mr-5" %>
+          <%= link_to "削除する" ,delivery_path(delivery.id) , method: :delete , class:"btn btn-outline-danger btn-sm mb-1 ml-5" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

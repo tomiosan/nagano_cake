@@ -1,9 +1,9 @@
 class Order < ApplicationRecord
   after_update :check_order_detail
-  
+
   belongs_to :customer
   has_many :order_details, dependent: :destroy
-  
+
   enum status: {
       wating_for_payment: 0,
       confirmed_payment: 1,
@@ -28,30 +28,30 @@ class Order < ApplicationRecord
     end
   end
 
-  def order_products_total_price
+  def order_items_total_price
     (total_price - 800).round
   end
 
-  def order_products_total_quantity
-    self.order_products.sum(:quantity)
+  def order_items_total_quantity
+    self.order_items.sum(:quantity)
   end
 
 
-  after_create :move_cart_products
+  after_create :move_cart_items
   after_update :check_order_detail
 
   private
 
-  def move_cart_products
-    cart_products_list = self.customer.cart_products.map do |cart_product|
+  def move_cart_items
+    cart_items_list = self.customer.cart_items.map do |cart_item|
       {
-        product_id: cart_product.product_id,
-        tax_included_price: cart_product.product.add_tax_included_price,
-        quantity: cart_product.quantity
+        item_id: cart_item.item_id,
+        tax_included_price: cart_item.item.add_tax_included_price,
+        quantity: cart_item.quantity
       }
     end
-    self.order_details.create(cart_products_list)
-    self.customer.cart_products.destroy_all
+    self.order_details.create(cart_items_list)
+    self.customer.cart_items.destroy_all
   end
 
   def check_order_detail

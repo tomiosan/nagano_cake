@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row pb-5 pt-2">
+
+   <div class="col-lg-2 col-md-12 text-center">
+     <%= render "public/searches/genre_sidebar", genres: @genres %>
+    </div>
+
+    <div class="col-md-10">
+      <h3>
+        "<%= @keyword %>"の検索結果
+        <span style="font-size:20px;"></span>
+      </h3>
+
+      <%= render "public/items/index", items: @items %>
+    </div>
+
+  </div>
+</div>

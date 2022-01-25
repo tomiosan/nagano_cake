@@ -1,0 +1,19 @@
+<table class="table table-light table-hover table-borderless border">
+  <thead class="table-active">
+    <tr>
+      <th class="text-center text-white bg-dark">ジャンル検索</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% genres.each do |genre| %>
+      <tr class="text-center">
+        <td>
+        <%= link_to genre_search_path('search[value]': genre.name, 'search[how]': "match"), class: "text-reset text-decoration-none" do %>
+            <div class="px-3"><%= genre.name =%></div>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
